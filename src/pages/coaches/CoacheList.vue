@@ -1,4 +1,9 @@
 <template>
+  <section>
+    FILTER
+  </section>
+  <section>
+    LIST OF COACHES
   <router-view></router-view>
   <ul>
     <CoachItem
@@ -10,11 +15,12 @@
     ></CoachItem>
 
   </ul>
+</section>
 </template>
 
 <script>
 import CoachItem from './CoachItem.vue';
-import { useStore } from '../store.js'
+import { useStore } from '../../store.js'
 export default {
   components: {
     CoachItem
