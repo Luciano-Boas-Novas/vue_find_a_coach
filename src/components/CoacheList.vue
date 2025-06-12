@@ -2,7 +2,11 @@
   <router-view></router-view>
   <ul>
     <CoachItem
-    v-for="coach in store.coaches"
+      :key="coach.id"
+      :firstName="coach.firstName"
+      :lastName="coach.lastName"
+      :hourlyRate="coach.hourlyRate"
+
     ></CoachItem>
 
   </ul>
@@ -22,3 +26,14 @@ export default {
   }
 }
 </script>
+<style>
+ul {
+  list-style: none;
+  margin: 2rem auto;
+  max-width: 40rem;
+  padding: 0;
+  background: #f9f9f9;      
+  border-radius: 8px;        
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+</style>

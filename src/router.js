@@ -1,17 +1,15 @@
-import { createRouter } from "vue-router";
+import { createRouter, createWebHistory } from 'vue-router';
+
 
 const router = createRouter({
-
-routes: [
-    {path:'/coaches', component: CoacheList, children: [
-            {
-              name: 'coachs-team',
-              path: ':coachId', 
-              component: CoachDetails,
-              props: true,
-            },
-          ],},
-],
-
-
+  history: createWebHistory(),
+  routes:[
+  { path: '/coaches', component: null },
+  { path: '/coaches/:id', component: null, children: [
+    {path: 'contact', component:null},
+  ]},
+  {path: '/register', component: null},
+  {path: '/requests' ,component: null},
+  {path: '/:notFound(.*)', coomponent: null}]
 });
+export default router;

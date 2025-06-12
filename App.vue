@@ -1,4 +1,9 @@
 <template>
-  <router-view></router-view>
+    <CoacheList></CoacheList>
+    <router-view></router-view>
+  </template>
   
-</template>
+  <script >
+  import CoacheList from './src/components/CoacheList.vue';
+  </script>
+  
