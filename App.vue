@@ -1,17 +1,19 @@
 <template>
-   
-    <router-view></router-view>
-  </template>
-  
-  <script >
-    import TheHeader from './src/layout/TheHeader.vue';
-    export default{
-        
-    }
-  </script>
-  <style >
-  @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+  <TheHeader />
+  <router-view />
+</template>
 
+<script>
+import TheHeader from './src/layout/TheHeader.vue';
+
+export default {
+  components: {
+    TheHeader
+  }
+}
+</script>
+
+<style>
 * {
   box-sizing: border-box;
 }
