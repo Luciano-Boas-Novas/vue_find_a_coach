@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div>FILTER</div>
+    <CoachFilter @change-filter="setFilters" />
   </section>
 
   <section>
@@ -12,7 +12,7 @@
 
       <ul>
         <CoachItem
-          v-for="coach in store.coaches"
+          v-for="coach in filteredCoaches"
           :key="coach.id"
           :id="coach.id"
           :firstName="coach.firstName"
@@ -27,23 +27,53 @@
 
 <script>
 import CoachItem from './CoachItem.vue';
+import CoachFilter from './CoachFilter.vue';
 import { useStore } from '../../store.js';
-
+import { computed, reactive } from 'vue';
 
 export default {
   components: {
-    CoachItem
+    CoachItem,
+    CoachFilter
   },
 
   setup() {
     const store = useStore();
 
-  
+    const activeFilters = reactive({
+      frontend: true,
+      backend: true,
+      carrer: true
+    });
 
-    return { store };
+    const setFilters = (updatedFilters) => {
+      Object.assign(activeFilters, updatedFilters);
+    };
+
+    const filteredCoaches = computed(() => {
+      return store.coaches.filter(coach => {
+        if (activeFilters.frontend && coach.areas.includes('frontend')) {
+          return true;
+        }
+        if (activeFilters.backend && coach.areas.includes('backend')) {
+          return true;
+        }
+        if (activeFilters.carrer && coach.areas.includes('carrer')) {
+          return true;
+        }
+        return false;
+      });
+    });
+
+    return {
+      store,
+      filteredCoaches,
+      setFilters
+    };
   }
 };
 </script>
+
 
 <style scoped>
 ul {
