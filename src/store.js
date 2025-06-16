@@ -24,7 +24,7 @@ export const useStore = defineStore('store', {
           id: 'c3',
           firstName: 'Amenic',
           lastName: 'Santiago',
-          areas: ['Wordpress', ''],
+          areas: ['Wordpress', 'htrtr'],
           description: 'Experienced life coach...',
           hourlyRate: 50
         }

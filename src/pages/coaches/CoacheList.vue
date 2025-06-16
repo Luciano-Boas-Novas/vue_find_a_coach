@@ -1,53 +1,51 @@
 <template>
   <section>
-
     <div>FILTER</div>
   </section>
 
   <section>
-    <div class="controls">
-      <button @click="refreshCoaches">Refresh</button>
-      <RouterLink to="/register">Registrar um Coach</RouterLink>
-    </div>
+    <base-card>
+      <div class="controls">
+        <base-button mode="outline">Refresh</base-button>
+        <base-button link to="/register">Registrar um Coach</base-button>
+      </div>
 
-    <ul>
-      <CoachItem
-        v-for="coach in store.coaches"
-        :key="coach.id"
-        :firstName="coach.firstName"
-        :lastName="coach.lastName"
-        :hourlyRate="coach.hourlyRate"
-      />
-    </ul>
+      <ul>
+        <CoachItem
+          v-for="coach in store.coaches"
+          :key="coach.id"
+          :id="coach.id"
+          :firstName="coach.firstName"
+          :lastName="coach.lastName"
+          :hourlyRate="coach.hourlyRate"
+          :areas="coach.areas"
+        />
+      </ul>
+    </base-card>
   </section>
 </template>
 
 <script>
 import CoachItem from './CoachItem.vue';
 import { useStore } from '../../store.js';
-import { RouterLink } from 'vue-router';
-import { onMounted } from 'vue';
+
 
 export default {
   components: {
-    CoachItem,
-    RouterLink
+    CoachItem
   },
 
   setup() {
     const store = useStore();
 
-    onMounted(() => {
-      store.loadCoaches();
-    });
-
-   
+  
 
     return { store };
   }
-}
+};
 </script>
-<style>
+
+<style scoped>
 ul {
   list-style: none;
   margin: 2rem auto;
