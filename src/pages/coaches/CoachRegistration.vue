@@ -1,7 +1,7 @@
 <template>
     <base-card>
     <p>Coach details go here.</p>
-    <CoachForm></CoachForm>
+    <CoachForm @save-data="saveData"></CoachForm>
     </base-card>
   </template>
   
@@ -11,7 +11,8 @@
   export default {
     components: {
       CoachForm
-    }
+    },
+   
   };
   </script>
   

@@ -43,17 +43,20 @@
   </template>
   
   <script>
-  import { ref, defineEmits } from 'vue';
+  import { ref } from 'vue';
+  import { useStore } from '../../store.js';
   
   export default {
     setup() {
+        const store = useStore();
+
       const name = ref('');
       const sobrenome = ref('');
       const descricao = ref('');
       const hourlyRate = ref(null);
       const areas = ref([]);
   
-      const emit = defineEmits(['submitForm']);
+
   
       const submitForm = () => {
         const formData = {
@@ -63,7 +66,7 @@
           rate: hourlyRate.value,
           areas: areas.value,
         };
-        emit('submitForm', formData);
+        store.saveData(formData); 
       };
   
       return {

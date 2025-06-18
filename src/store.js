@@ -31,5 +31,12 @@ export const useStore = defineStore('store', {
 
       ]
     };
-  }
+  },
+  actions: {
+      saveData(data) {
+        data.id = 'c' + (this.coaches.length + 1);
+        this.coaches.push(data);
+      }
+    
+}
 });
