@@ -1,4 +1,5 @@
 <template>
+  <base-card>
     <section>
       <label>
         <input type="checkbox" id="frontend" :checked="filters.frontend" @change="setFilter" />
@@ -13,6 +14,7 @@
         Career
       </label>
     </section>
+  </base-card>
   </template>
   
   

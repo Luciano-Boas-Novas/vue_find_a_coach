@@ -3,6 +3,11 @@ import { defineStore } from "pinia";
 export const useStore = defineStore('store', {
   state: () => {
     return {
+      messages:[{
+        coachId: '',
+        email:'',
+        message:''
+      }],
       coaches: [
         {
           id: 'c1',
@@ -33,10 +38,17 @@ export const useStore = defineStore('store', {
     };
   },
   actions: {
-      saveData(data) {
-        data.id = 'c' + (this.coaches.length + 1);
-        this.coaches.push(data);
-      }
-    
+    saveData(data) {
+      const newCoach = {
+        id: 'c' + (this.coaches.length + 1),
+        firstName: data.firstName,
+        lastName: data.lastName,
+        areas: data.areas,
+        description: data.description,
+        hourlyRate: data.hourlyRate
+      };
+      this.coaches.push(newCoach);
+    }
+  }
 }
-});
+);
