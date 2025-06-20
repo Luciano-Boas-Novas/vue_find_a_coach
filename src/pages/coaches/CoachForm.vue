@@ -41,7 +41,6 @@
     <base-button type="submit">Register</base-button>
   </form>
 </template>
-
 <script>
 import { ref } from 'vue';
 
@@ -52,6 +51,7 @@ export default {
     const descricao = ref('');
     const hourlyRate = ref(null);
     const areas = ref([]);
+    const errors = ref([]);  // <-- declare errors aqui
 
     const validateForm = () => {
       errors.value = [];
@@ -74,6 +74,7 @@ export default {
 
       return errors.value.length === 0;
     };
+
     const submitForm = () => {
       if (!validateForm()) {
         console.warn('Formulário inválido:', errors.value);
@@ -95,10 +96,12 @@ export default {
       descricao,
       hourlyRate,
       areas,
+      errors,
       submitForm
     };
   }
 };
+
 </script>
 <style scoped>
 .form-control {

@@ -10,7 +10,7 @@ const app = createApp(App)
 const pinia = createPinia(); 
 app.use(Router);
 app.use(pinia);
-app.component('base-card',BaseCard); 
+app.component('base-badge',BaseCard); 
 app.component('base-button',BaseButton);
 app.component('base-card',BaseBadge);
 app.mount('#app');

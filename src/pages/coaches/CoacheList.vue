@@ -1,13 +1,12 @@
 <template>
   <section>
-    <CoachFilter @change-filter="setFilters" />
+    <coach-filter @change-filter="setFilters"></coach-filter>
   </section>
-
   <section>
     <base-card>
       <div class="controls">
         <base-button mode="outline">Refresh</base-button>
-        <base-button link to="/register">Registrar um Coach</base-button>
+        <base-button v-if="!isCoach" link to="/register">Register as Coach</base-button>
       </div>
 
       <ul>

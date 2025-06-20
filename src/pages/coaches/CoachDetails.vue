@@ -1,61 +1,56 @@
 <template>
-    <section>
-<base-badge>
-  <h2>Reach out now</h2>
-  <header>
-    <base-button link :to="contactLink">Contact</base-button>
-  </header>
-  <router-view></router-view>
-</base-badge>
-</section>
-
-<section>
-<base-badge>
-  <base-card
-    v-for="area in areas"
-    :key="area"
-    :type="area"
-    :title="area"
-  />
-  <p>{{ description }}</p>
-</base-badge>
-</section>
-
-
+  <section>
+    <base-card>
+      <h2>{{ fullName }}</h2>
+      <h3>${{ rate }}/hour</h3>
+    </base-card>
+  </section>
+  <section>
+    <base-card>
+      <header>
+        <h2>Interested? Reach out now!</h2>
+        <base-button link :to="contactLink">Contact</base-button>
+      </header>
+      <router-view></router-view>
+    </base-card>
+  </section>
+  <section>
+    <base-card>
+      <base-badge v-for="area in areas" :key="area" :type="area" :title="area"></base-badge>
+      <p>{{ description }}</p>
+    </base-card>
+  </section>
 </template>
 <script>
 import { computed } from 'vue';
+import { useStore } from '../../store';
+import { RouterLink, useRoute } from 'vue-router'; 
 
 export default {
-props:['id'],
-setup() {
-const route = useRoute();
-const store = useStore();
+  props: ['id'],
+  setup() {
+    const route = useRoute();
+    const store = useStore();
 
-const coachId = route.params.id;
-const selectedCoach = store.coaches.find(coach => coach.id === coachId);
+    const coachId = route.params.id;
+    const selectedCoach = store.coaches.find(coach => coach.id === coachId);
 
-const fullName = computed(() => {
-  return `${selectedCoach.firstName} ${selectedCoach.lastName}`;
-});
+    const fullName = computed(() => {
+      return `${selectedCoach.firstName} ${selectedCoach.lastName}`;
+    });
 
-const rate = computed(() => selectedCoach.hourlyRate);
+    const rate = computed(() => selectedCoach.hourlyRate);
+    const areas = computed(() => selectedCoach.areas);
+    const description = computed(() => selectedCoach.description);
+    const contactLink = computed(() => `/coaches/${coachId}/contact`);
 
-const areas = computed(() => selectedCoach.areas);
-const description = computed(() => selectedCoach.description);
-
-const contactLink = computed(() => `/coaches/${coachId}/contact`);
-
-return {
-  fullName,
-  rate,
-  areas,
-  description,
-  contactLink
-};
+    return {
+      fullName,
+      rate,
+      areas,
+      description,
+      contactLink
+    };
+  }
 }
-
-
-}
-
 </script>
