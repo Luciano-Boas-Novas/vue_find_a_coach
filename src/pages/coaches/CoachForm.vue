@@ -51,7 +51,7 @@ export default {
     const descricao = ref('');
     const hourlyRate = ref(null);
     const areas = ref([]);
-    const errors = ref([]);  // <-- declare errors aqui
+    const errors = ref([]);  
 
     const validateForm = () => {
       errors.value = [];
