@@ -5,7 +5,7 @@
   <section>
     <base-card>
       <div class="controls">
-        <base-button mode="outline">Refresh</base-button>
+        <base-button mode="outline" @click="loadCoaches">Refresh</base-button>
         <base-button v-if="!isCoach" link to="/register">Register as Coach</base-button>
       </div>
 
@@ -44,11 +44,14 @@ export default {
       backend: true,
       carrer: true
     });
-
+    const isLoading = false;
     const setFilters = (updatedFilters) => {
       Object.assign(activeFilters, updatedFilters);
     };
-
+    const loadCoaches = () =>{
+      isLoading = true;
+      store.loadCoaches();
+    }
     const filteredCoaches = computed(() => {
       return store.coaches.filter(coach => {
         if (activeFilters.frontend && coach.areas.includes('frontend')) {
@@ -63,11 +66,14 @@ export default {
         return false;
       });
     });
-
+    onMounted(() => {
+    loadCoaches();
+  });
     return {
       store,
       filteredCoaches,
-      setFilters
+      setFilters,
+      loadCoaches
     };
   }
 };

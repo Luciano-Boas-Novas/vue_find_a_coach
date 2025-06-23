@@ -53,7 +53,7 @@ export const useStore = defineStore('store', {
       const ids = coachesData ? Object.keys(coachesData) : [];
       let maxIdNumber = 0;
       ids.forEach(id => {
-        // Exemplo: id = 'c4' => extrai número 4
+    
         const numberPart = parseInt(id.replace('c', ''));
         if (!isNaN(numberPart) && numberPart > maxIdNumber) {
           maxIdNumber = numberPart;
@@ -63,7 +63,7 @@ export const useStore = defineStore('store', {
 
       const newId = 'c' + (maxIdNumber + 1);
     
-      // 4. Montar o objeto coach
+
       const newCoach = {
         firstName: data.firstName,
         lastName: data.lastName,
@@ -72,7 +72,7 @@ export const useStore = defineStore('store', {
         hourlyRate: data.hourlyRate
       };
     
-      // 5. Salvar no Firebase com PUT (ID controlado)
+   
       const response = await fetch(`https://back-end-coaches-default-rtdb.firebaseio.com/coaches/${newId}.json`, {
         method: 'PUT',
         headers: {
@@ -85,7 +85,7 @@ export const useStore = defineStore('store', {
         throw new Error('Erro ao salvar no Firebase.');
       }
     
-      // 6. Atualizar estado local
+ 
       this.coaches.push({ ...newCoach, id: newId });
     },
     
@@ -100,6 +100,27 @@ export const useStore = defineStore('store', {
         message,
       };
       this.requests.push(newRequest);
+    },
+    setCoachea(payload){
+      this.coaches = payload;
+    },
+    async loadCoaches(){
+     const response = 
+     await fetch(`https://back-end-coaches-default-rtdb.firebaseio.com/coaches.json`);
+     const responseData = await response.json();
+     const coaches = [];
+
+     for(const key in responseData){
+        const coach = {
+        id: key,
+        firstName: responseData[key].firstName,
+        lastName: responseData[key].lastName,
+        areas: responseData[key].areas,
+        description: responseData[key].description,
+        hourlyRate: responseData[key].hourlyRate
+        };
+     }
+     coaches.push(coach);
     }
   },
   getters: {
